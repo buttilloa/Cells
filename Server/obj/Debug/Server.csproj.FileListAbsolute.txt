@@ -1,6 +1,5 @@
 C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Server\bin\Debug\Server.exe.config
 C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache
-C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Server\obj\Debug\Server.Form1.resources
 C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Server\obj\Debug\Server.Properties.Resources.resources
 C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Server\obj\Debug\Server.csproj.GenerateResource.Cache
 C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Server\bin\Debug\Server.exe
@@ -25,3 +24,4 @@ C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Server\obj\Debug\Server.c
 C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Server\obj\Debug\Server.Properties.Resources.resources
 C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Server\obj\Debug\Server.csproj.GenerateResource.Cache
 C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Server\obj\Debug\Server.ServerForm.resources
+C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Server\obj\Debug\Server.ServerForm.resources

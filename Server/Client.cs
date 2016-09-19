@@ -11,15 +11,18 @@ namespace Server
     class Client
     {
         string IPAddress;
-        int ID, port;  
+        int port;
+        public long ID;
         NetConnection conection;
+        PlayerData player;
         public bool isconnected = true;
-        public Client(String ip, int ID, NetConnection connect)
+        public Client(String ip, NetConnection connect , PlayerData player)
         {
             this.IPAddress = ip;
-            this.ID = ID;
+            this.ID = connect.RemoteUniqueIdentifier;
             this.conection = connect;
             port =connect.RemoteEndPoint.Port;
+            this.player = player;
         }
         public NetConnection getConnection()
         {
@@ -29,14 +32,14 @@ namespace Server
         {
             return IPAddress;
         }
-        public int getID()
+        public long getID()
         {
             return ID;
         }
-        public static int getByIP(string Address, List<Client> clients)
+        public static int getByID(long ID, List<Client> clients)
         {
             for (int i = 0; i < clients.Count; i++)
-                if (clients[i].getIP() == Address)
+                if (clients[i].ID == ID)
                     return i;
             return -1;
         }

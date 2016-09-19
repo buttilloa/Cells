@@ -10,7 +10,7 @@ namespace Server
 {
     class GameData
     {
-        public int Width = 1000, Height = 1000;
+        public static int Width = 1000, Height = 1000;
         List<Cell> cells = new List<Cell>();
         Random randy;
         int colorCount = 9;
@@ -92,6 +92,7 @@ namespace Server
                 ServerHandle.SetText("[SERVER]Succesfully created all " + count + " cells\n", 0);
             }
         }
+        
     }
     class Cell
     {

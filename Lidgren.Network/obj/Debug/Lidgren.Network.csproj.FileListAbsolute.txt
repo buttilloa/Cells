@@ -1,0 +1,12 @@
+C:\Users\Anthony\Desktop\lidgren-network-gen3-master\lidgren-network-gen3-master\Lidgren.Network\bin\Debug\Lidgren.Network.XML
+C:\Users\Anthony\Desktop\lidgren-network-gen3-master\lidgren-network-gen3-master\Lidgren.Network\bin\Debug\Lidgren.Network.dll
+C:\Users\Anthony\Desktop\lidgren-network-gen3-master\lidgren-network-gen3-master\Lidgren.Network\bin\Debug\Lidgren.Network.pdb
+C:\Users\Anthony\Desktop\lidgren-network-gen3-master\lidgren-network-gen3-master\Lidgren.Network\obj\Debug\Lidgren.Network.csprojResolveAssemblyReference.cache
+C:\Users\Anthony\Desktop\lidgren-network-gen3-master\lidgren-network-gen3-master\Lidgren.Network\obj\Debug\Lidgren.Network.dll
+C:\Users\Anthony\Desktop\lidgren-network-gen3-master\lidgren-network-gen3-master\Lidgren.Network\obj\Debug\Lidgren.Network.pdb
+C:\Users\antho\Documents\Visual Studio 2013\Projects\Cells\Lidgren.Network\bin\Debug\Lidgren.Network.XML
+C:\Users\antho\Documents\Visual Studio 2013\Projects\Cells\Lidgren.Network\bin\Debug\Lidgren.Network.dll
+C:\Users\antho\Documents\Visual Studio 2013\Projects\Cells\Lidgren.Network\bin\Debug\Lidgren.Network.pdb
+C:\Users\antho\Documents\Visual Studio 2013\Projects\Cells\Lidgren.Network\obj\Debug\Lidgren.Network.csprojResolveAssemblyReference.cache
+C:\Users\antho\Documents\Visual Studio 2013\Projects\Cells\Lidgren.Network\obj\Debug\Lidgren.Network.dll
+C:\Users\antho\Documents\Visual Studio 2013\Projects\Cells\Lidgren.Network\obj\Debug\Lidgren.Network.pdb

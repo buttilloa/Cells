@@ -1,0 +1,5 @@
+C:\Users\Anthony\Desktop\lidgren-network-gen3-master\lidgren-network-gen3-master\Lidgren.Network\bin\Release\Lidgren.Network.dll
+C:\Users\Anthony\Desktop\lidgren-network-gen3-master\lidgren-network-gen3-master\Lidgren.Network\bin\Release\Lidgren.Network.pdb
+C:\Users\Anthony\Desktop\lidgren-network-gen3-master\lidgren-network-gen3-master\Lidgren.Network\obj\Release\Lidgren.Network.csprojResolveAssemblyReference.cache
+C:\Users\Anthony\Desktop\lidgren-network-gen3-master\lidgren-network-gen3-master\Lidgren.Network\obj\Release\Lidgren.Network.dll
+C:\Users\Anthony\Desktop\lidgren-network-gen3-master\lidgren-network-gen3-master\Lidgren.Network\obj\Release\Lidgren.Network.pdb

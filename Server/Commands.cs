@@ -83,8 +83,8 @@ namespace Server
                     Log("Set Map size to " + args[2] + ", " + args[3] + "\n");
                     NetOutgoingMessage msg = ServerHandle.server.CreateMessage();
                     msg.Write((byte)PacketTypes.MAPSIZE);
-                    msg.Write(Commands.Server.data.Width);
-                    msg.Write(Commands.Server.data.Height);
+                    msg.Write(GameData.Width);
+                    msg.Write(GameData.Height);
                     ServerHandle.server.SendToAll(msg, NetDeliveryMethod.ReliableOrdered);
 
                     break;

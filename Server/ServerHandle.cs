@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Server
-{
-    enum PacketTypes
+{  enum PacketTypes
     {
         PLAYER,
         MAPSIZE,
         CELLCOUNT,
         CELLS,
-        REQUESTPLAYERS,
+        PLAYERDATA,
         SENDPLAYERS,
         KILL,
         ID,
         LEAVE,
-        CLEARCELL
+        CLEARCELL,
+        MOUSE
 
     }
     class ServerHandle
@@ -62,6 +62,7 @@ namespace Server
             new Thread(new ThreadStart(SendPlayerData)).Start();
             SetText("Started...\n", 0);
             data.generateCells();
+            new Thread(new ThreadStart(UpdateLoop)).Start();
         }
         
         public void listen()
@@ -85,9 +86,10 @@ namespace Server
                             break;
                         case NetIncomingMessageType.ConnectionApproval:
                             msgIn.SenderConnection.Approve();
+                            Console.WriteLine(msgIn.SenderConnection.RemoteUniqueIdentifier);
                             SetText("[" + msgIn.SenderEndPoint + "]Connected\n", 0);
-                            regClients.Add(new Client(msgIn.SenderEndPoint.Address.ToString(), regClients.Count, msgIn.SenderConnection));
-                            parent.addConnection(regClients.Last().getID(), regClients.Last().getIP());
+                            regClients.Add(new Client(msgIn.SenderEndPoint.Address.ToString(), msgIn.SenderConnection, PlayerData.RandomPlayer(msgIn.SenderConnection.RemoteUniqueIdentifier)));
+                            parent.addConnection((int)regClients.Last().getID(), regClients.Last().getIP());
                             NetOutgoingMessage msgout = server.CreateMessage();
                             msgout.Write((byte)PacketTypes.ID);
                             msgout.Write(regClients.Last().getID());
@@ -104,31 +106,38 @@ namespace Server
             {
                 NetIncomingMessage msg = (NetIncomingMessage)msg2;
                 String user = msg.SenderEndPoint.Address.ToString();
-                int clietNum = Client.getByIP(msg.SenderEndPoint.Address.ToString(), regClients);
+                int clietNum = Client.getByID(msg.SenderConnection.RemoteUniqueIdentifier, regClients);
                 if (clietNum > -1)
                     user = "C:" + clietNum;
                 switch ((PacketTypes)msg.ReadByte())
                 {
                     #region PLAYER
                     case PacketTypes.PLAYER:
-                        PlayerData newPlayer = new PlayerData(new Vector2(msg.ReadInt32(), msg.ReadInt32()), msg.ReadSingle(), msg.ReadInt32(), user);
-                        ThreadPool.QueueUserWorkItem(handlePlayerData, newPlayer);
+                        PlayerData newPlayer = new PlayerData(new Vector2(msg.ReadInt32(), msg.ReadInt32()), msg.ReadSingle(), msg.ReadInt32(), msg.SenderConnection.RemoteUniqueIdentifier);
+                        //ThreadPool.QueueUserWorkItem(handlePlayerData, newPlayer);
                         //new Thread(() => handlePlayerData(newPlayer)).Start();
+                        break;
+                    #endregion
+                    #region MOUSE
+                    case PacketTypes.MOUSE:
+                        //Vector2 velocity = new Vector2(msg.ReadInt32(), msg.ReadInt32());
+                       ThreadPool.QueueUserWorkItem(handleMouseData, msg);
+                        //new Thread(() => h(newPlayer)).Start();
                         break;
                     #endregion
                     #region MAPSIZE
                     case PacketTypes.MAPSIZE:
-                        if (data.Width == 0 || data.Height == 0)
+                        if (GameData.Width == 0 || GameData.Height == 0)
                         {
                             data.setMapSize(msg.ReadInt32(), msg.ReadInt32());
-                            SetText("[" + user + "]Set Map size to " + data.Width + "," + data.Height + "\n", 0);
+                            SetText("[" + user + "]Set Map size to " + GameData.Width + "," + GameData.Height + "\n", 0);
                         }
                         else
                         {
                             NetOutgoingMessage msgout = server.CreateMessage();
                             msgout.Write((byte)PacketTypes.MAPSIZE);
-                            msgout.Write(data.Width);
-                            msgout.Write(data.Height);
+                            msgout.Write(GameData.Width);
+                            msgout.Write(GameData.Height);
                             server.SendMessage(msgout, regClients[clietNum].getConnection(), NetDeliveryMethod.ReliableOrdered);
                             SetText("[" + user + "]Requested Map data \n", 0);
                         } break;
@@ -144,23 +153,6 @@ namespace Server
                         SetText("[" + user + "]Parsing cells\n", 0);
                         break;
                     #endregion
-                    #region REQUESTPLAYER
-                    case PacketTypes.REQUESTPLAYERS:
-                        SetText("[" + user + "]requested players \n", 0);
-                        NetOutgoingMessage msgOut = server.CreateMessage();
-                        msgOut.Write((byte)PacketTypes.SENDPLAYERS);
-                        msgOut.Write(players.Count - 1);
-                        for (int i = 0; i < players.Count; i++)
-                        {
-                            msgOut.Write((int)players[i].Pos.X);
-                            msgOut.Write((int)players[i].Pos.Y);
-                            msgOut.Write((int)players[i].size);
-                            msgOut.Write((int)players[i].color);
-
-                        }
-                        server.SendToAll(msgOut, NetDeliveryMethod.ReliableOrdered);
-                        break;
-                    #endregion
                     #region LEAVE
                     case PacketTypes.LEAVE:
                         int ID = msg.ReadInt32();
@@ -171,12 +163,21 @@ namespace Server
                 }
             }
         }
-        public void handlePlayerData(object obj)
+        public void handleMouseData(object obj)
+        {
+            if (obj is NetIncomingMessage)
+            {
+                NetIncomingMessage MsgIN = (NetIncomingMessage)obj;
+               int pos= Client.getByID(MsgIN.SenderConnection.RemoteUniqueIdentifier, regClients);
+               players[pos].setVelocity(new Vector2(MsgIN.ReadInt32(), MsgIN.ReadInt32()));
+            }
+        }
+        /*  public void handlePlayerData(object obj)
         {
             if (obj is PlayerData)
             {
                 PlayerData newPlayer = (PlayerData)obj;
-                string user = newPlayer.ID;
+                long user = newPlayer.ID;
                 if (Convert.ToInt32(user.Substring(2)) > players.Count - 1)
                 {
                     players.Add(newPlayer);
@@ -191,7 +192,7 @@ namespace Server
                     }
                 }
             }
-        }
+        }*/
         public void SendPlayerData()
         {
             NetOutgoingMessage msgOut = server.CreateMessage();
@@ -212,6 +213,18 @@ namespace Server
                 server.SendToAll(msgOut, NetDeliveryMethod.UnreliableSequenced);
             }
         }
+
+        public void UpdateLoop()
+        {
+            while (true)
+            {
+                for (int i = 0; i < players.Count; i++)
+                {
+                    players[i].updatePos();
+                }
+            }
+        }
+        
         delegate void SetTextCallback(string text, int call);
         public static void SetText(string text, int call)
         {

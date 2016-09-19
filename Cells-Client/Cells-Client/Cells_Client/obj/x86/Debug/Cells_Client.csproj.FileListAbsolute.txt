@@ -1,0 +1,11 @@
+c:\users\anthony\documents\visual studio 2013\Projects\Cells-Client\Cells-Client\Cells_Client\obj\x86\Debug\Cells_Client.csprojResolveAssemblyReference.cache
+c:\users\anthony\documents\visual studio 2013\Projects\Cells-Client\Cells-Client\Cells_Client\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Cells-Client\Cells-Client\Cells_Client\obj\x86\Debug\Cells_Client.csprojResolveAssemblyReference.cache
+C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Cells-Client\Cells-Client\Cells_Client\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Cells-Client\Cells-Client\Cells_Client\bin\x86\Debug\Content\circle.xnb
+C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Cells-Client\Cells-Client\Cells_Client\bin\x86\Debug\Content\RECT.xnb
+C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Cells-Client\Cells-Client\Cells_Client\bin\x86\Debug\Cells_Client.exe
+C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Cells-Client\Cells-Client\Cells_Client\bin\x86\Debug\Cells_Client.pdb
+C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Cells-Client\Cells-Client\Cells_Client\bin\x86\Debug\Lidgren.Network.dll
+C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Cells-Client\Cells-Client\Cells_Client\obj\x86\Debug\Cells_Client.exe
+C:\Users\Anthony\Documents\Visual Studio 2013\Projects\Cells\Cells-Client\Cells-Client\Cells_Client\obj\x86\Debug\Cells_Client.pdb
